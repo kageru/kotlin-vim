@@ -20,7 +20,8 @@ syn keyword ktType Any Boolean Byte Char Double Float Int Long Nothing Short Uni
 syn keyword ktModifier annotation companion enum inner internal private protected public abstract final open override sealed vararg dynamic expect actual
 syn keyword ktStructure class object interface typealias fun val var constructor init
 
-syn keyword ktKeyword class object interface fun typealias nextgroup=ktItemName skipwhite skipempty
+syn keyword ktKeyword fun nextgroup=ktItemName skipwhite skipempty
+syn keyword ktKeyword class object interface typealias nextgroup=ktClassName skipwhite skipempty
 
 syn keyword ktReservedKeyword typeof
 
@@ -42,6 +43,10 @@ syn match ktDocTag "\v\@(exception|param|property|throws|see|sample)>\s*\S+" con
 syn match ktDocTagParam "\v(\s|\[)\S+" contained
 syn match ktComment "/\*\*/"
 syn match ktItemName "\v([a-zA-Z_][a-zA-Z0-9_]*|`[^`]+`)" contained
+syn match ktClassName "\v[A-Z][a-zA-Z0-9_]*" contained
+
+syn match ktFunctionCall "\v([a-zA-Z_][a-zA-Z0-9_]*|`[^`]+`)(\(|\<)"he=e-1,me=e-1
+syn match ktConstructorCall "\v[A-Z][a-zA-Z0-9_]*(\(|\<)"he=e-1,me=e-1
 
 syn match ktSpecialCharError "\v\\." contained
 syn match ktSpecialChar "\v\\([tbnr'"$\\]|u\x{4})" contained
@@ -79,10 +84,13 @@ hi def link ktReservedKeyword Error
 hi def link ktInclude Include
 
 hi def link ktType Type
+hi def link ktClassName Type
 hi def link ktModifier StorageClass
 hi def link ktStructure Structure
 hi def link ktTypedef Typedef
 hi def link ktItemName Function
+hi def link ktFunctionCall Function
+hi def link ktConstructorCall Type
 
 hi def link ktBoolean Boolean
 hi def link ktConstant Constant
